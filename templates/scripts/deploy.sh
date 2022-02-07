@@ -15,7 +15,7 @@ fi
 
 echo "Creating datalake component..."
 
-docker build -t datalake-component:latest https://github.com/stack-spot/data-lake-env-py-component
+docker build -t datalake-component:latest https://github.com/stack-spot/data-lake-env-py-component.git#main
 
 docker run \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
