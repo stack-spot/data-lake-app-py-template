@@ -1,0 +1,36 @@
+name: datalake
+description: A Data Lake is an infrastructure base that creates an environment to store analytical data
+types:
+  - env-template
+inputs:
+  - label: Datalake name
+    type: text
+    name: datalake_name
+  - label: AWS region
+    type: text
+    name: region
+# lifecycle block to configure commands to execute when user run "os deploy"
+lifecycle:
+  deploy:
+    # Optional supported os definition. When not informed support all OSes
+    supported-os:
+      - linux
+      - mac
+    # Optional block to define requirements checks before execute deploy command
+    requirements-check:
+      # each requirement check is a block with a command 
+      # and an information shown to user when command return code is not 0
+      check-docker:
+        # in this example the check-command is common for all OSes
+        check-command: docker ps
+        info: docker is is not installed
+    # Deploy command to execute when dependencies are ok
+    # can be a string when the command is not os dependent or a 
+    # command by os like check-command example. 
+    # The ${stage} placeholder is replaced by stage informed to os deploy command
+    #deploy-command: docker run -v /Users/leandroqueiroz/zup/orange/os-cli/datalake-env/src/template:/src/template -v /Users/leandroqueiroz/.aws:/home/orange/.aws -i datalake-component:latest create datalake -f /src/template/manifest.yaml
+    # example with os dependent deploy command 
+    deploy-command:
+    #  windows: cmd -c scripts\deploy.bat
+      linux: sh ./scripts/deploy.sh
+      mac: sh ./scripts/deploy.sh

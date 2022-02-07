@@ -1,0 +1,4 @@
+datalake:
+  # Data Lake name, required
+  name: {{inputs.datalake_name}}
+  region: {{inputs.region}}
