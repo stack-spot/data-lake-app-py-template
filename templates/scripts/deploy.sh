@@ -15,13 +15,11 @@ fi
 
 echo "Creating datalake component..."
 
-docker build -t datalake-component:latest https://github.com/stack-spot/data-lake-env-py-component.git#main
-
 docker run \
   -e "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" \
   -e "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" \
   -e "AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN" \
   -v "$PWD/components/datalake:/src/template" \
-  -i "datalake-component:latest" \
+  -i "stackspot/data-lake-env-py-component:v1.2.0" \
   create datalake -f /src/template/manifest.yaml
 
